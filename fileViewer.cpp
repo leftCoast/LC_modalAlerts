@@ -184,7 +184,7 @@ void	fileListBox::setFileDir(fileDir* inFileDir) {  ourFileDir = inFileDir; }
 
 
 // As each path item is created its handed in here to check if its OK to add to the list.
-bool fileListBox::checkFile(pathItem* trace) {
+bool fileListBox::checkFile(const char* trace) {
 	
 	if (filterFx) {
 		return filterFx(trace);
@@ -204,7 +204,7 @@ void fileListBox::fillList(void) {
 	if (ourFileDir) {																							// If we have a fileDir. (Sanity)
 		trace = ourFileDir->getChildList();																// Grab a pointer to the first child.
 		while(trace) {																							// While we have a non-NULL pointer..
-			if (checkFile(trace)) {																			// Pass this child through the crucible of the user's filter function.
+			if (checkFile(trace->getName())) {															// Pass this child through the crucible of the user's filter function.
 				newListItem = new fileListItem(this,trace->getType(),trace->getName());		// If this 
 				if (newListItem) {																			// If we got a list item. (More sanity)
 					addObj(newListItem);																		// Add this item to our list.

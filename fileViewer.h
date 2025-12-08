@@ -47,11 +47,11 @@ class fileListBox :	public scrollingList {
 	virtual	~fileListBox(void);
 				
 				void	setFileDir(fileDir* inFileDir);
-				bool	checkFile(pathItem* trace);
+				bool	checkFile(const char* trace);
 	virtual	void	fillList(void);
 	virtual	void	drawSelf(void);
 	
-				bool		(*filterFx)(pathItem*);
+				bool		(*filterFx)(const char*);
 				fileDir*	ourFileDir;
 				bmpObj*	folderBmp;
 				bmpObj*	docBmp;
