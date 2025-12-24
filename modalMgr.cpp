@@ -70,7 +70,7 @@ bool modal::acceptEvent(event* inEvent,point* locaPt) {
 // *****************************************************
 
 
-// Our modla link constructor..	
+// Our modal link constructor..	
 modalLink::modalLink(modal* inModal)
 	: linkListObj() {
  
@@ -80,7 +80,7 @@ modalLink::modalLink(modal* inModal)
 	
 
 // Our destructor. If we still have a link to our modal, we delete that first. And that
-// will cause our link to our modla to be NULLed out by the death of the modal. Shouldn't
+// will cause our link to our modal to be NULLed out by the death of the modal. Shouldn't
 // be an issue because we are not going to be around to acces it again anyway.
 modalLink::~modalLink(void) {
 
@@ -117,7 +117,7 @@ modalMgr::~modalMgr(void) { }
 // This is NOT called by the user. This is called by the modal. During the modal's
 // constructor it calls this method to link itself into the modal manager's list. The
 // modal manager creates a modalLink object to track this new modal. THEN the new modal
-// gets a pointer the new modalLink object so it can unlink itself it someone deletes it.
+// gets a pointer the new modalLink object so it can unlink itself if someone deletes it.
 //
 // So..
 //
@@ -130,11 +130,11 @@ modalMgr::~modalMgr(void) { }
 //
 // C) The modal may get deleted by something else. (Scary world out there.) WHEN it's
 //    deleted, it NULLs out the modalLink Object's pointer to itself. Breaking the link
-//    and casing its demise to be flagged.
+//    and causing its demise to be flagged.
 //
 // D) Hence : when the modalLink object deletes itself, it first checks to see if the link
 //    to the modal is valid. If so, it will delete the modal. If not, it assumes someone
-//    else did its job for it and goes on its merry way being deleted without re-deleting
+//    else did its job for it and goes on its merry way being deleted, without re-deleting
 //    the modal.
 //
 // The idea is that in this way, it doens't matter who deletes the modal. Both work fine.
