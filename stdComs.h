@@ -45,7 +45,8 @@ class stdComBtn : public iconButton {
 	virtual	~stdComBtn(void);
 	
 	virtual	void	doAction(void);
-				void	active(bool trueFalse);
+				void	setActive(bool trueFalse);
+				bool	getActive(void); 
 				
 				listener*	ourListener;
 				stdComs		ourComID;

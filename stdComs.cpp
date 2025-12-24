@@ -38,7 +38,7 @@ void stdComBtn::doAction(void) {
 }
 
 
-void stdComBtn::active(bool trueFalse) {
+void stdComBtn::setActive(bool trueFalse) {
 				
 	if (trueFalse) {
 		setEventSet(touchLift);
@@ -47,6 +47,8 @@ void stdComBtn::active(bool trueFalse) {
 	}
 }
 
+
+bool stdComBtn::getActive(void) { return !(getEventSet()==noEvents); }
 
 // Need a standard label icon? Here you go!
 bmpObj* newStdLbl(int x,int y,iconSize inSize,stdLabels iconType) {
