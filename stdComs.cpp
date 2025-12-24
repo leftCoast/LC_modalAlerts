@@ -31,7 +31,11 @@ stdComBtn::stdComBtn(int xLoc,int yLoc,const char* path,stdComs iconType,listene
 stdComBtn::~stdComBtn(void) {  }
 
 	
-void stdComBtn::doAction(void) { ourListener->handleCom(ourComID); }
+void stdComBtn::doAction(void) {
+
+	OSPtr->beep();
+	ourListener->handleCom(ourComID);
+}
 
 
 void stdComBtn::active(bool trueFalse) {
