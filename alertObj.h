@@ -24,7 +24,7 @@ class alertObj :	public modal,
 	virtual	bool	acceptEvent(event* inEvent,point* locaPt);
 	virtual	void	drawSelf(void);
 	virtual	void	handleCom(stdComs comID);
-	
+				
 				listener*	ourListener;
 				textView*	theMsg;
 				stdComBtn*	okBtn;
