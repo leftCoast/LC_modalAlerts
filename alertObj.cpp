@@ -98,10 +98,10 @@ void alertObj::drawSelf(void) {
 void alertObj::handleCom(stdComs comID) {
 
 	switch(comID) {
-		case okCmd		:  							//setSuccess(true); break;
-		case cancelCmd	: done = true; break;	// setSuccess(false); break;
+		case okCmd		:  							// Success
+		case cancelCmd	: done = true; break;	// They say no!
 		default			: break;						// Should never happen, let it slide.		
-	}														//
+	}													//
 	if (ourListener) {								// Got a listener?
 		ourListener->handleCom(comID);			// Pass it on.
 	}
