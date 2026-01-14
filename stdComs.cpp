@@ -194,6 +194,13 @@ stdComBtn* newStdBtn(int x,int y,iconSize inSize,stdComs iconType,listener* inLi
 				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(edit32),iconType,inListener,32);
 			}	
 		break;
+		case readmeCmd :
+			if (inSize==icon22) {
+				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(qMark22),iconType,inListener,22);
+			}	else if (inSize==icon32) {
+				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(qMark32),iconType,inListener,32);
+			}	
+		break;
 	}
 	if (anIconPtr) {
 		if  (inSize==icon22) {

@@ -9,7 +9,7 @@
 
 enum stdComs	{	cutCmd, copyCmd, closeCmd, pasteCmd, cancelCmd, okCmd, newFileCmd,
 						newFolderCmd, newItemCmd, openFileCmd, saveFileCmd, deleteItemCmd,
-						searchCmd, sortCmd, editCmd };
+						searchCmd, sortCmd, editCmd, readmeCmd };
 
 enum stdLabels	{	warnLbl, choiceLbl, noteLbl, folderLbl, folderRetLbl, docLbl,
 						SDCardLbl };
