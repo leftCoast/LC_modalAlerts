@@ -194,7 +194,7 @@ void folderAlert::createFolder(void) {
 	finalPath = NULL;														// All pointers we start at NULL.
 	if (ourPath) {															// If we actually have a path.. (sanity)
 		numBytes = ourPath->numPathBytes();							// Get the amount of bytes the path string needs.
-		numBytes = numBytes + strlen(nameLabel->editBuff);		// Add the number of bytes the name string needs.
+		numBytes = numBytes + nameLabel->numBytesEditBuff();	// Add the number of bytes the name string needs.
 		if(resizeBuff(numBytes,&finalPath)) {						// If we can grab the memory for this..
 			strcpy(finalPath,ourPath->getPath());					// Our original path goes in.
 			strcat(finalPath,nameLabel->editBuff);					// We add the user's name/path to it.
@@ -261,7 +261,7 @@ char* saveFileDir::endChoice(void) {
 	int	numBytes;
 	
 	numBytes = numPathBytes();
-	numBytes = numBytes + strlen(((fSaveObj*)ourViewer)->getName());
+	numBytes = numBytes + ((fSaveObj*)ourViewer)->getNameLen();
 	if(resizeBuff(numBytes,&finalPath)) {
 		strcpy(finalPath,getPath());
 		strcat(finalPath,((fSaveObj*)ourViewer)->getName());
@@ -327,6 +327,9 @@ fSaveObj::~fSaveObj(void) {
 
 
 char*	fSaveObj::getName(void) { return nameLabel->editBuff; }
+
+
+int	fSaveObj::getNameLen(void) { return nameLabel->numBytesEditBuff(); }
 
 
 void fSaveObj::setName(const char* inName) {

@@ -89,6 +89,7 @@ class fSaveObj :	public fileViewer,
 	
 				void	setName(const char* inName);
 				char*	getName(void);
+				int	getNameLen(void);
 				void	setSelectedName(const char* name);
 				void	setMode(saveModes newMode);
 	virtual	void	handleCom(stdComs comID);

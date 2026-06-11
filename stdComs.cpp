@@ -23,7 +23,7 @@ void listener::handleCom(stdComs comID) {  }
 stdComBtn::stdComBtn(int xLoc,int yLoc,const char* path,stdComs iconType,listener* inListener,int pixles)
 	:iconButton(xLoc,yLoc,path,pixles) { 
 	
-	ourListener = inListener;
+	ourListener = inListener;	// We may be passed a NULL here. Make sure to check when using.
 	ourComID		= iconType;
 }
 
@@ -33,8 +33,10 @@ stdComBtn::~stdComBtn(void) {  }
 	
 void stdComBtn::doAction(void) {
 
-	OSPtr->beep();
-	ourListener->handleCom(ourComID);
+	if (ourListener) {
+		OSPtr->beep();
+		ourListener->handleCom(ourComID);
+	}
 }
 
 
@@ -95,118 +97,121 @@ stdComBtn* newStdBtn(int x,int y,iconSize inSize,stdComs iconType,listener* inLi
 
 	stdComBtn*	anIconPtr;
 
-	anIconPtr = NULL;
-	switch (iconType) {
-		case cutCmd		:
-			if (inSize==icon32) {
-				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(cut32),iconType,inListener,32);
-			}		
-		break;
-		case copyCmd	:
-			if (inSize==icon32) {
-				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(copy32),iconType,inListener,32);
-			}		
-		break;
-		case closeCmd	:
-			if (inSize==icon22) {
-				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(x22),iconType,inListener,22);
-			}		
-		break;
-		case pasteCmd :
-			if (inSize==icon32) {
-				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(paste32),iconType,inListener,32);
-			}		
-		break;
-		case cancelCmd :
-			if (inSize==icon22) {
-				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(x22),iconType,inListener,22);
-			}	else if (inSize==icon32) {
-				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(x32),iconType,inListener,32);
-			}	
-		break;
-		case okCmd :
-			if (inSize==icon22) {
-				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(check22),iconType,inListener,22);
-			}	else if (inSize==icon32) {
-				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(check32),iconType,inListener,32);
-			}	
-		break;
-		case newFileCmd :
-			if (inSize==icon22) {
-				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(fNew22),iconType,inListener,22);
-			}	else if (inSize==icon32) {
-				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(fNew32),iconType,inListener,32);
-			}	
-		break;
-		case newFolderCmd :
-			if (inSize==icon22) {
-				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(FdrNew22),iconType,inListener,22);
-			}	else if (inSize==icon32) {
-				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(FdrNew32),iconType,inListener,32);
-			}	
-		break;
-		case newItemCmd :
-			if (inSize==icon22) {
-				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(cross22),iconType,inListener,22);
-			}	else if (inSize==icon32) {
-				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(cross32),iconType,inListener,32);
-			}	
-		break;
-		case openFileCmd :
-			if (inSize==icon22) {
-				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(fOpen22),iconType,inListener,22);
-			}	else if (inSize==icon32) {
-				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(fOpen32),iconType,inListener,32);
-			}	
-		break;
-		case saveFileCmd :
-			if (inSize==icon22) {
-				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(fSave22),iconType,inListener,22);
-			}	else if (inSize==icon32) {
-				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(fSave32),iconType,inListener,32);
-			}	
-		break;
-		case deleteItemCmd :
-			if (inSize==icon22) {
-				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(trashC22),iconType,inListener,22);
-			}	else if (inSize==icon32) {
-				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(trashC32),iconType,inListener,32);
-			}	
-		break;
-		case searchCmd :
-			if (inSize==icon22) {
-				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(search22),iconType,inListener,22);
-			}	else if (inSize==icon32) {
-				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(search32),iconType,inListener,32);
-			}	
-		break;
-		case sortCmd	:
-			if (inSize==icon22) {
-				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(sort22),iconType,inListener,22);
-			}	else if (inSize==icon32) {
-				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(sort32),iconType,inListener,32);
-			}	
-		break;
-		case editCmd :
-			if (inSize==icon22) {
-				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(edit22),iconType,inListener,22);
-			}	else if (inSize==icon32) {
-				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(edit32),iconType,inListener,32);
-			}	
-		break;
-		case readmeCmd :
-			if (inSize==icon22) {
-				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(qMark22),iconType,inListener,22);
-			}	else if (inSize==icon32) {
-				anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(qMark32),iconType,inListener,32);
-			}	
-		break;
-	}
-	if (anIconPtr) {
-		if  (inSize==icon22) {
-			anIconPtr->setMask(&(OSPtr->icon22Mask));
-		} else if (inSize==icon32) {
-			anIconPtr->setMask(&(OSPtr->icon32Mask));
+	anIconPtr = NULL;						// Even if all else fails. We send this back. Init it.
+	if (inListener) {						// Don't even try with a NULL listener!
+		switch (iconType) {
+			case cutCmd		:
+				if (inSize==icon32) {
+					anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(cut32),iconType,inListener,32);
+				}		
+			break;
+			case copyCmd	:
+				if (inSize==icon32) {
+					anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(copy32),iconType,inListener,32);
+				}		
+			break;
+			case closeCmd	:
+				if (inSize==icon22) {
+					anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(x22),iconType,inListener,22);
+				}		
+			break;
+			case pasteCmd :
+				if (inSize==icon32) {
+					anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(paste32),iconType,inListener,32);
+				}		
+			break;
+			case cancelCmd :
+				if (inSize==icon22) {
+					anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(x22),iconType,inListener,22);
+				}	else if (inSize==icon32) {
+					anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(x32),iconType,inListener,32);
+				}	
+			break;
+			case okCmd :
+				if (inSize==icon22) {
+					anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(check22),iconType,inListener,22);
+				}	else if (inSize==icon32) {
+					anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(check32),iconType,inListener,32);
+				}	
+			break;
+			case newFileCmd :
+				if (inSize==icon22) {
+					anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(fNew22),iconType,inListener,22);
+				}	else if (inSize==icon32) {
+					anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(fNew32),iconType,inListener,32);
+				}	
+			break;
+			case newFolderCmd :
+				if (inSize==icon22) {
+					anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(FdrNew22),iconType,inListener,22);
+				}	else if (inSize==icon32) {
+					anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(FdrNew32),iconType,inListener,32);
+				}	
+			break;
+			case newItemCmd :
+				if (inSize==icon22) {
+					anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(cross22),iconType,inListener,22);
+				}	else if (inSize==icon32) {
+					anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(cross32),iconType,inListener,32);
+				}	
+			break;
+			case openFileCmd :
+				if (inSize==icon22) {
+					anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(fOpen22),iconType,inListener,22);
+				}	else if (inSize==icon32) {
+					anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(fOpen32),iconType,inListener,32);
+				}	
+			break;
+			case saveFileCmd :
+				if (inSize==icon22) {
+					anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(fSave22),iconType,inListener,22);
+				}	else if (inSize==icon32) {
+					anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(fSave32),iconType,inListener,32);
+				}	
+			break;
+			case deleteItemCmd :
+				if (inSize==icon22) {
+					anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(trashC22),iconType,inListener,22);
+				}	else if (inSize==icon32) {
+					anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(trashC32),iconType,inListener,32);
+				}	
+			break;
+			case searchCmd :
+				if (inSize==icon22) {
+					anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(search22),iconType,inListener,22);
+				}	else if (inSize==icon32) {
+					anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(search32),iconType,inListener,32);
+				}	
+			break;
+			case sortCmd	:
+				if (inSize==icon22) {
+					anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(sort22),iconType,inListener,22);
+				}	else if (inSize==icon32) {
+					anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(sort32),iconType,inListener,32);
+				}	
+			break;
+			case editCmd :
+				if (inSize==icon22) {
+					anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(edit22),iconType,inListener,22);
+				}	else if (inSize==icon32) {
+					anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(edit32),iconType,inListener,32);
+				}	
+			break;
+			case readmeCmd	:
+				if (inSize==icon22) {
+					anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(qMark22),iconType,inListener,22);
+				}	else if (inSize==icon32) {
+					anIconPtr = new stdComBtn(x,y,OSPtr->getStdIconPath(qMark32),iconType,inListener,32);
+				}	
+			break;
+			default	: Serial.println("Got bougus icon type in stdComs.cpp newStdBtn()"); break;
+		}
+		if (anIconPtr) {
+			if  (inSize==icon22) {
+				anIconPtr->setMask(&(OSPtr->icon22Mask));
+			} else if (inSize==icon32) {
+				anIconPtr->setMask(&(OSPtr->icon32Mask));
+			}
 		}
 	}
 	return anIconPtr;

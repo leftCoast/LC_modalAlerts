@@ -65,10 +65,17 @@ fileListItem::fileListItem(fileListBox* inList,pathItemType inType,char* inName)
 	ourList		= inList;
 	ourType		= inType;
 	ourName		= NULL;
-	numChars = strlen(inName)+1;
-	if (resizeBuff(numChars,&ourName)) {
-		strcpy(ourName,inName);
-	}
+	
+	if (inName) {										// If we got a name..
+		numChars = strlen(inName)+1;				// Calc space needed.
+		if (resizeBuff(numChars,&ourName)) {	// See if we can allocate enough room..
+			strcpy(ourName,inName);					// Ok pop it in there.
+		}													// We're done.
+	} else {												// Oh great! We got a NULL..
+		if (resizeBuff(1,&ourName)) {				// Setup for an empty string.
+			ourName[0] = '\0';						// If we got the RAM stamp in a null char.
+		}													// Else? Wwhat? We can't allocate a char?! We're dead anyway..
+	}														//
 }
 
 
