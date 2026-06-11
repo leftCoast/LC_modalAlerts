@@ -50,6 +50,8 @@ class stdComBtn : public iconButton {
 				stdComs		ourComID;
 };
 
+
+// Couple handy functions for pulic use to get these items created.
 bmpObj*		newStdLbl(int x,int y,iconSize inSize,stdLabels iconType);
 stdComBtn*	newStdBtn(int x,int y,iconSize inSize,stdComs iconType,listener* inListener);
 
