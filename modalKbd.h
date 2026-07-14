@@ -15,7 +15,7 @@
 class modalKbd :	public bmpKeyboard {
 
 	public :
-				modalKbd(void);
+				modalKbd(screenTypes=sType240x320);
 	virtual	~modalKbd(void);
 	
 	virtual	void			setListener(listener* inListener);
@@ -27,7 +27,7 @@ class modalKbd :	public bmpKeyboard {
 				listener*	ourListener;
 };
 
-
+//sType320x480
 
 // **************************************************************
 // *********************** kbdUser  stuff ***********************
@@ -37,7 +37,7 @@ class modalKbd :	public bmpKeyboard {
 class kbdUser {
 
 	public :
-				kbdUser(listener* inListener);
+				kbdUser(listener* inListener,screenTypes inType=sType240x320);
 	virtual	~kbdUser(void);
 	
 				void			setEditField(editable* inEditable);

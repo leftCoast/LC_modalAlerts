@@ -12,12 +12,12 @@ int				kbdUsers	= 0;
 
 
 // Our modal keyboard constructor..
-modalKbd::modalKbd(void)
-	: bmpKeyboard(NULL,true) {		// Make me a modal with no editing field.
+modalKbd::modalKbd(screenTypes inType)
+	: bmpKeyboard(NULL,true,inType) {		// Make me a modal with no editing field.
 	
-	ourListener = NULL;				// No listener.
-	loadKeys();							// Load the keys. (Why not in the .bmp constructor?)
-	viewList.addObj(this);			// And we add ourselves to the root view list.
+	ourListener = NULL;							// No listener.
+	loadKeys();										// Load the keys. (Why not in the .bmp constructor?)
+	viewList.addObj(this);						// And we add ourselves to the root view list.
 }
 
 
@@ -60,12 +60,12 @@ void modalKbd::handleKey(keyCommands inEditCom) {
 
 // Constructor. Make sure there IS a keyboard. Save the last modal's edit field so we can
 // replace it later.	Save off who our last Listener was so we can reset that as well.
-kbdUser::kbdUser(listener* inListener) {
+kbdUser::kbdUser(listener* inListener,screenTypes inType) {
 
 	lastEditObj		= NULL;												// Nice to start off as a NULL.
 	lastListener	= NULL;												// This one too.
 	if (!theKbd) {															// If no keyboard..
-		theKbd = new modalKbd;											// We create one.
+		theKbd = new modalKbd(inType);								// We create one.
 		kbdUsers	= 0;														// And set the user count to zero.
 	}																			//
 	if (theKbd) {															// Ok. If we have, or just created, a keyboard..
