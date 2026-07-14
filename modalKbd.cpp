@@ -29,7 +29,7 @@ modalKbd::~modalKbd(void) { }
 void modalKbd::setListener(listener* inListener) { ourListener = inListener; }
 	
 	
-// Set our listener. The guy that wants to hear commands like okCmd.
+// Get our listener. The guy that wants to hear commands like okCmd.
 listener* modalKbd::getListener(void) { return ourListener; }
 
 	
