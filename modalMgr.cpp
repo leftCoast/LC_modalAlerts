@@ -34,6 +34,14 @@ void modal::init(void) {
 }
 
 
+// Go for center screen.
+void  modal::centerX(void) { x = (screen->width() - width)/2; }
+
+
+// Go for center screen.
+void  modal::centerY(void) { y = (screen->height() - height)/2; }
+
+
 // Do what it takes to not have things draw over you. (Like the button that created you.)
 void  modal::checkIfReady(void) {
 

@@ -28,6 +28,8 @@ class modal :	public drawGroup {
 	virtual	~modal(void);
 	
 				void	init(void);
+				void	centerX(void);
+				void	centerY(void);
 	virtual	void  checkIfReady(void);
 	virtual	void	draw(void);
 	virtual	bool	acceptEvent(event* inEvent,point* locaPt);

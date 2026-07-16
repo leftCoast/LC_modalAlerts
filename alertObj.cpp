@@ -4,9 +4,11 @@
 
 //#include <debug.h>
 
-#define	ALERT_X		20
+// Alert location defaults. y, width & height are default values, x is set to center the
+// box.
+
 #define	ALERT_Y		40
-#define	ALERT_W		240 - 2 * ALERT_X
+#define	ALERT_W		200
 #define	ALERT_H		80
 
 #define	MSG_X			45
@@ -25,12 +27,13 @@
 
 
 alertObj::alertObj(const char* msg,listener* inListener,alertType inType,bool useOk,bool useCancel)
-	: modal(ALERT_X,ALERT_Y,ALERT_W,ALERT_H) { 
+	: modal(0,ALERT_Y,ALERT_W,ALERT_H) { 
 	
 	bmpObj*	ourLabel;
 	
 	ourLabel = NULL;
 	ourListener = inListener;
+	centerX();
 	theMsg = new textView(MSG_X,MSG_Y,MSG_W,MSG_H);
 	if (theMsg) {
 		theMsg->setTextColors(&black,&white);
@@ -67,7 +70,7 @@ alertObj::alertObj(const char* msg,listener* inListener,alertType inType,bool us
 	
 alertObj::~alertObj(void) { ourPanel->aTouchAbove(); }
 
-
+								 
 // User wants the message changed. What - ever!
 void alertObj::setMsg(const char* inMessage) { theMsg->setText(inMessage); }
 
