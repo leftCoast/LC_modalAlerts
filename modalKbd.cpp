@@ -127,4 +127,9 @@ void kbdUser::checkKbdEvent(event* inEvent,point* globalPt) {
 	}
 }
 
-	
+
+modalKbd* kbdUser::getKbd(void) { return theKbd; }
+
+
+
+

@@ -42,6 +42,7 @@ class kbdUser {
 	
 				void			setEditField(editable* inEditable);
 				void			checkKbdEvent(event* inEvent,point* globalPt);
+				modalKbd*	getKbd(void);
 				
 				listener*	lastListener;
 				editable*	lastEditObj;
